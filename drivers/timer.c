@@ -7,10 +7,8 @@
  *@version 1.0.0 
  * 
  *@description: 定时器底层配置
- */
- 
+ */ 
 #include "timer.h"
-#include "sys_conf.h"
 
 TIM_ICInitTypeDef encoders_channel[4];
 
@@ -18,12 +16,12 @@ u8  TIM3CH1_CAPTURE_STA=0;
 u16 TIM3CH1_CAPTURE_VAL;
  
 /**
- *@function TIM3 PWM部分初始化 
+ *@function TIM3 初始化 
  *@param 
  *			arr：自动重装值
  *			psc：时钟预分频数
  */
-void TIM3_PWM_Init(u16 arr,u16 psc)
+void TIM3_Init(u16 arr,u16 psc)
 {  
 	TIM_TimeBaseInitTypeDef  TIM_TimeBaseStructure;
 	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM3, ENABLE);	/* 使能定时器3时钟 */

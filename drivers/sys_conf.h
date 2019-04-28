@@ -28,12 +28,14 @@
 #include "motor_gpio.h"
 #include "led.h"
 #include "encoder.h"
+#include "motor_operate.h"
 
 /**
  *@description define 
  *在这里配置用户代码中的define值
  */
-
+#define a 300
+#define b 200
 
 /**
  *@description extern 
@@ -48,5 +50,21 @@ extern motor Motors[];
 extern u8  TIM3CH1_CAPTURE_STA;
 extern u16 TIM3CH1_CAPTURE_VAL;
 
+typedef struct wheel_speed
+{
+	u8 Vw0;
+	u8 Vw1;
+	u8 Vw2;
+	u8 Vw3;
+}wheel_speed;
+extern wheel_speed W_S;
+
+typedef struct car_speed
+{
+	u8 Vx;
+	u8 Vy;
+	u8 W;
+}car_speed;
+extern car_speed C_S;
 
 #endif

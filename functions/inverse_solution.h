@@ -6,17 +6,12 @@
  *@author:tony-lin
  *@version 1.0.0 
  * 
- *@description:	电机驱动
+ *@description:	麦克纳姆轮移动平台运动学逆解
  */
-
+#ifndef _INVERSE_SOLUTION_H_
+#define _INVERSE_SOLUTION_H_
 #include "sys_conf.h"
 
-void motor_init(void)
-{
-	TIM3_Init(1,1);
-}
+void speed_inverse_solution(car_speed* car_s);
 
-void motor_run(wheel_speed* ws)
-{
-	
-}
+#endif

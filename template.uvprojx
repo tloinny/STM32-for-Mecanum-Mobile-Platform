@@ -389,6 +389,18 @@
         </Group>
         <Group>
           <GroupName>function</GroupName>
+          <Files>
+            <File>
+              <FileName>motor_operate.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\functions\motor_operate.c</FilePath>
+            </File>
+            <File>
+              <FileName>inverse_solution.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\functions\inverse_solution.c</FilePath>
+            </File>
+          </Files>
         </Group>
         <Group>
           <GroupName>drivers</GroupName>
