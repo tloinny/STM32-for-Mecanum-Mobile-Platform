@@ -99,3 +99,41 @@ void TIM3_IRQHandler(void)
 	}
 	TIM_ClearITPendingBit(TIM3, TIM_IT_CC1|TIM_IT_Update);
 }
+
+/**
+ *@function TIM4 PWM 初始化 
+ *@param 
+ *			arr：自动重装值
+ *			psc：时钟预分频数
+ */
+void TIM4_PWM_Init(u16 arr,u16 psc)
+{  
+	TIM_TimeBaseInitTypeDef TIM_TimeBaseStructure;
+	TIM_OCInitTypeDef TIM_OCInitStructure;
+
+	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM4, ENABLE);
+ 
+   /* 初始化TIM4 */
+	TIM_TimeBaseStructure.TIM_Period = arr;
+	TIM_TimeBaseStructure.TIM_Prescaler =psc;
+	TIM_TimeBaseStructure.TIM_ClockDivision = 0;
+	TIM_TimeBaseStructure.TIM_CounterMode = TIM_CounterMode_Up;
+	TIM_TimeBaseInit(TIM4, &TIM_TimeBaseStructure);
+	
+	/* 初始化TIM4 PWM模式 */	 
+	TIM_OCInitStructure.TIM_OCMode = TIM_OCMode_PWM1; /* 选择定时器模式:TIM脉冲宽度调制模式2 */
+ 	TIM_OCInitStructure.TIM_OutputState = TIM_OutputState_Enable;
+	TIM_OCInitStructure.TIM_OCPolarity = TIM_OCPolarity_High; /* 输出极性:TIM输出比较极性高 */
+	
+	TIM_OC1Init(TIM4, &TIM_OCInitStructure);  /* 初始化外设TIM4 OC1 */
+	TIM_OC2Init(TIM4, &TIM_OCInitStructure);  /* 初始化外设TIM4 OC2 */
+	TIM_OC3Init(TIM4, &TIM_OCInitStructure);  /* 初始化外设TIM4 OC3 */
+	TIM_OC4Init(TIM4, &TIM_OCInitStructure);  /* 初始化外设TIM4 OC4 */
+
+	TIM_OC1PreloadConfig(TIM4, TIM_OCPreload_Enable);  /* 使能TIM4在CCR1上的预装载寄存器 */
+	TIM_OC2PreloadConfig(TIM4, TIM_OCPreload_Enable);  /* 使能TIM4在CCR2上的预装载寄存器 */
+	TIM_OC3PreloadConfig(TIM4, TIM_OCPreload_Enable);  /* 使能TIM4在CCR3上的预装载寄存器 */
+	TIM_OC4PreloadConfig(TIM4, TIM_OCPreload_Enable);  /* 使能TIM4在CCR4上的预装载寄存器 */
+	
+	TIM_Cmd(TIM4, ENABLE);  //使能TIM3
+}
