@@ -29,6 +29,7 @@
 #include "led.h"
 #include "encoder.h"
 #include "motor_operate.h"
+#include "inverse_solution.h"
 
 /**
  *@description define 

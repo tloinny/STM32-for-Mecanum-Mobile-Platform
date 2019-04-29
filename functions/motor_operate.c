@@ -10,7 +10,7 @@
  */
 
 #include "motor_operate.h"
-
+extern wheel_speed W_S;
 /**
  *@function 电机资源初始化
  *@param void
@@ -20,8 +20,8 @@ void motor_init(void)
 {
 	motor_io_init();	/* 初始化电机驱动引脚 */
 	encoder_io_init();	/* 初始化编码器接口 */
-	TIM3_Init(1,1);	/* 初始化TIM3,提供给编码器使用 */
-	TIM4_PWM_Init(1,1);	/* 初始化TIM4,提供给电机驱动使用 */
+	TIM3_Init(TIM3_ARR,TIM3_PSC);	/* 初始化TIM3,提供给编码器使用 */
+	TIM4_PWM_Init(TIM4_ARR,TIM4_PSC);	/* 初始化TIM4,提供给电机驱动使用 */
 }
 
 /**
@@ -29,10 +29,10 @@ void motor_init(void)
  *@param void
  *@return void
  */
-void motor_run(wheel_speed* ws)
+void motor_run()
 {
 	/* 先设置转向 */
-	if(ws->Vw0 > 0)
+	if(W_S.Vw0 > 0)
 	{
 		set_dir(0,1);
 	}else
@@ -40,7 +40,7 @@ void motor_run(wheel_speed* ws)
 		set_dir(0,0);
 	}
 	
-	if(ws->Vw1 > 0)
+	if(W_S.Vw1  > 0)
 	{
 		set_dir(1,1);
 	}else
@@ -48,7 +48,7 @@ void motor_run(wheel_speed* ws)
 		set_dir(1,0);
 	}
 	
-	if(ws->Vw2 > 0)
+	if(W_S.Vw2 > 0)
 	{
 		set_dir(2,1);
 	}else
@@ -56,7 +56,7 @@ void motor_run(wheel_speed* ws)
 		set_dir(2,0);
 	}
 	
-	if(ws->Vw3 > 0)
+	if(W_S.Vw3 > 0)
 	{
 		set_dir(3,1);
 	}else
@@ -65,10 +65,10 @@ void motor_run(wheel_speed* ws)
 	}
 	
 	/* 再设置转速 */
-	TIM_SetCompare1(TIM4,TIM4_ARR*(ws->Vw0)/MAX_RPM);
-	TIM_SetCompare2(TIM4,TIM4_ARR*(ws->Vw1)/MAX_RPM);
-	TIM_SetCompare3(TIM4,TIM4_ARR*(ws->Vw2)/MAX_RPM);
-	TIM_SetCompare4(TIM4,TIM4_ARR*(ws->Vw3)/MAX_RPM);
+	TIM_SetCompare1(TIM4,TIM4_ARR*(W_S.Vw0)/MAX_RPM);
+	TIM_SetCompare2(TIM4,TIM4_ARR*(W_S.Vw1)/MAX_RPM);
+	TIM_SetCompare3(TIM4,TIM4_ARR*(W_S.Vw2)/MAX_RPM);
+	TIM_SetCompare4(TIM4,TIM4_ARR*(W_S.Vw3)/MAX_RPM);
 }
 
 /**

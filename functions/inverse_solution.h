@@ -12,6 +12,6 @@
 #define _INVERSE_SOLUTION_H_
 #include "sys_conf.h"
 
-void speed_inverse_solution(car_speed* car_s);
+void speed_inverse_solution(void);
 
 #endif

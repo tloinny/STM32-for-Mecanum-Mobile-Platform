@@ -11,11 +11,12 @@
 #include "inverse_solution.h"
 
 wheel_speed W_S;
+car_speed C_S;
 
-void speed_inverse_solution(car_speed* car_s)
+void speed_inverse_solution()
 {
-	W_S.Vw0 = car_s->Vx - car_s->Vy - car_s->W *(a+b);
-	W_S.Vw1 = car_s->Vx + car_s->Vy + car_s->W *(a+b);
-	W_S.Vw2 = car_s->Vx - car_s->Vy + car_s->W *(a+b);
-	W_S.Vw3 = car_s->Vx + car_s->Vy - car_s->W *(a+b);
+	W_S.Vw0 = C_S.Vx - C_S.Vy - C_S.W *(a+b);
+	W_S.Vw1 = C_S.Vx + C_S.Vy + C_S.W *(a+b);
+	W_S.Vw2 = C_S.Vx - C_S.Vy + C_S.W *(a+b);
+	W_S.Vw3 = C_S.Vx + C_S.Vy - C_S.W *(a+b);
 }
