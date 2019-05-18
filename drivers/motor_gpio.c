@@ -43,7 +43,7 @@ void motor_io_init(void)
 	Motors[3].motor_gpio[2].GPIO_Pin = GPIO_Pin_11;
 	
 	for(int i=0;i<4;++i)
-		for(int n=1;n<3;++n)
+		for(int n=0;n<3;++n)
 		{
 			Motors[i].motor_gpio[n].GPIO_Mode = GPIO_Mode_AF_PP;
 			Motors[i].motor_gpio[n].GPIO_Speed = GPIO_Speed_50MHz;

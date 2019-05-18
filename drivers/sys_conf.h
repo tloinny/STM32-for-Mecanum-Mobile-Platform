@@ -39,7 +39,7 @@
 #define b 200
 #define TIM3_ARR 10000
 #define TIM3_PSC 7199
-#define TIM4_ARR 10000
+#define TIM4_ARR 1000
 #define TIM4_PSC 7199
 #define MAX_RPM 70
 

@@ -108,11 +108,13 @@ void TIM3_IRQHandler(void)
  */
 void TIM4_PWM_Init(u16 arr,u16 psc)
 {  
+	GPIO_InitTypeDef GPIO_InitStructure;
 	TIM_TimeBaseInitTypeDef TIM_TimeBaseStructure;
 	TIM_OCInitTypeDef TIM_OCInitStructure;
 
 	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM4, ENABLE);
- 
+	motor_io_init();	/* 初始化电机驱动引脚 */
+
    /* 初始化TIM4 */
 	TIM_TimeBaseStructure.TIM_Period = arr;
 	TIM_TimeBaseStructure.TIM_Prescaler =psc;
@@ -135,5 +137,5 @@ void TIM4_PWM_Init(u16 arr,u16 psc)
 	TIM_OC3PreloadConfig(TIM4, TIM_OCPreload_Enable);  /* 使能TIM4在CCR3上的预装载寄存器 */
 	TIM_OC4PreloadConfig(TIM4, TIM_OCPreload_Enable);  /* 使能TIM4在CCR4上的预装载寄存器 */
 	
-	TIM_Cmd(TIM4, ENABLE);  //使能TIM3
+	TIM_Cmd(TIM4, ENABLE);  //使能TIM4
 }
