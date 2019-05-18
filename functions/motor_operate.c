@@ -18,8 +18,6 @@ extern wheel_speed W_S;
  */
 void motor_init(void)
 {
-//	motor_io_init();	/* 初始化电机驱动引脚 */
-	encoder_io_init();	/* 初始化编码器接口 */
 	TIM3_Init(TIM3_ARR,TIM3_PSC);	/* 初始化TIM3,提供给编码器使用 */
 	TIM4_PWM_Init(TIM4_ARR,TIM4_PSC);	/* 初始化TIM4,提供给电机驱动使用 */
 }

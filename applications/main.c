@@ -23,6 +23,6 @@ int main(void)
 	C_S.Vy = 1;
 	C_S.W = 0;
 		speed_inverse_solution();
-		motor_run();
+		motor_run();    
 }
 

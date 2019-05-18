@@ -25,7 +25,9 @@ void TIM3_Init(u16 arr,u16 psc)
 {  
 	TIM_TimeBaseInitTypeDef  TIM_TimeBaseStructure;
 	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM3, ENABLE);	/* 使能定时器3时钟 */
- 
+	
+	encoder_io_init();	/* 初始化编码器接口 */
+	
    /* 初始化TIM3 */
 	TIM_TimeBaseStructure.TIM_Period = arr; /* 设置在下一个更新事件装入活动的自动重装载寄存器周期的值 */
 	TIM_TimeBaseStructure.TIM_Prescaler =psc; /* 设置用来作为TIMx时钟频率除数的预分频值 */
