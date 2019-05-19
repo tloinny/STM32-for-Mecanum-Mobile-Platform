@@ -49,7 +49,7 @@
  */
 typedef struct motor
 {
-	GPIO_TypeDef* motor_gpio_type;
+	GPIO_TypeDef* motor_gpio_type[3];
 	GPIO_InitTypeDef motor_gpio[3];
 }motor;
  

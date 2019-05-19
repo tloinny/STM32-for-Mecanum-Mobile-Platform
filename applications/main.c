@@ -20,9 +20,10 @@ int main(void)
 	motor_init();
 	
 	C_S.Vx = 1;
-	C_S.Vy = 1;
+	C_S.Vy = 0;
 	C_S.W = 0;
 		speed_inverse_solution();
 		motor_run();    
+	GPIO_SetBits(GPIOB,GPIO_Pin_3);
 }
 

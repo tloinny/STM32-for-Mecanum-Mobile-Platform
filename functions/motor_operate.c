@@ -80,15 +80,15 @@ void set_dir(int m, char dir)
 {
 	if(dir == 1)	/* 正转 */
 	{		
-		GPIO_ResetBits(Motors[m].motor_gpio_type,Motors[m].motor_gpio[1].GPIO_Pin);	/* N1 0*/
-		GPIO_SetBits(Motors[m].motor_gpio_type,Motors[m].motor_gpio[2].GPIO_Pin);	/* N2 1*/
+		GPIO_ResetBits(Motors[m].motor_gpio_type[1],Motors[m].motor_gpio[1].GPIO_Pin);	/* N1 0*/
+		GPIO_SetBits(Motors[m].motor_gpio_type[2],Motors[m].motor_gpio[2].GPIO_Pin);	/* N2 1*/
 	}else if(dir == 0)	/* 反转 */
 	{
-		GPIO_SetBits(Motors[m].motor_gpio_type,Motors[m].motor_gpio[1].GPIO_Pin);	/* N1 1*/	
-		GPIO_ResetBits(Motors[m].motor_gpio_type,Motors[m].motor_gpio[2].GPIO_Pin);	/* N2 0*/		
+		GPIO_SetBits(Motors[m].motor_gpio_type[1],Motors[m].motor_gpio[1].GPIO_Pin);	/* N1 1*/	
+		GPIO_ResetBits(Motors[m].motor_gpio_type[2],Motors[m].motor_gpio[2].GPIO_Pin);	/* N2 0*/		
 	}else	/* 停转 */
 	{
-		GPIO_ResetBits(Motors[m].motor_gpio_type,Motors[m].motor_gpio[1].GPIO_Pin);	/* N1 0*/	
-		GPIO_ResetBits(Motors[m].motor_gpio_type,Motors[m].motor_gpio[2].GPIO_Pin);	/* N2 0*/			
+		GPIO_ResetBits(Motors[m].motor_gpio_type[1],Motors[m].motor_gpio[1].GPIO_Pin);	/* N1 0*/	
+		GPIO_ResetBits(Motors[m].motor_gpio_type[2],Motors[m].motor_gpio[2].GPIO_Pin);	/* N2 0*/			
 	}
 }
