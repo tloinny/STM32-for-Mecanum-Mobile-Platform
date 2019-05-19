@@ -12,6 +12,7 @@
 #include "sys_conf.h"
 
 int main(void)
+
 {
 	delay_init();
 	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2);
@@ -19,9 +20,12 @@ int main(void)
 	uart_init(115200);
 	motor_init();
 	
-	C_S.Vx = 0.1;
-	C_S.Vy = 0.7;
-	C_S.W = 0.1;
+	C_S.Vx = 0;
+	C_S.Vy = 0;
+	C_S.W = 5
+	
+	
+	;
 		speed_inverse_solution();
 		motor_run();    
 	GPIO_SetBits(GPIOB,GPIO_Pin_10);

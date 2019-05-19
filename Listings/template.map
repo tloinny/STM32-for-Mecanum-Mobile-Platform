@@ -16,6 +16,7 @@ Section Cross References
     motor_operate.o(i.motor_enable) refers to stm32f10x_gpio.o(i.GPIO_SetBits) for GPIO_SetBits
     motor_operate.o(i.motor_init) refers to timer.o(i.TIM3_Init) for TIM3_Init
     motor_operate.o(i.motor_init) refers to timer.o(i.TIM4_PWM_Init) for TIM4_PWM_Init
+    motor_operate.o(i.motor_init) refers to motor_operate.o(i.motor_enable) for motor_enable
     motor_operate.o(i.motor_run) refers to cfrcmple.o(.text) for __aeabi_cfrcmple
     motor_operate.o(i.motor_run) refers to motor_operate.o(i.set_dir) for set_dir
     motor_operate.o(i.motor_run) refers to fmul.o(.text) for __aeabi_fmul
@@ -188,7 +189,6 @@ Section Cross References
 
 Removing Unused input sections from the image.
 
-    Removing motor_operate.o(i.motor_enable), (28 bytes).
     Removing pid.o(i.PID_CONTROLLER), (6 bytes).
     Removing pid.o(i.clear), (2 bytes).
     Removing pid.o(i.getKd), (2 bytes).
@@ -650,7 +650,7 @@ Removing Unused input sections from the image.
     Removing core_cm3.o(.emb_text), (32 bytes).
     Removing startup_stm32f10x_md.o(HEAP), (512 bytes).
 
-461 unused section(s) (total 17834 bytes) removed from the image.
+460 unused section(s) (total 17806 bytes) removed from the image.
 
 ==============================================================================
 
@@ -662,17 +662,17 @@ Image Symbol Table
 
     ../clib/microlib/init/entry.s            0x00000000   Number         0  entry9a.o ABSOLUTE
     ../clib/microlib/init/entry.s            0x00000000   Number         0  entry11b.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry2.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry5.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry9b.o ABSOLUTE
     ../clib/microlib/init/entry.s            0x00000000   Number         0  entry11a.o ABSOLUTE
     ../clib/microlib/init/entry.s            0x00000000   Number         0  entry10b.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry10a.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry9b.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry5.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry7a.o ABSOLUTE
     ../clib/microlib/init/entry.s            0x00000000   Number         0  entry7b.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry8b.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry7a.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry10a.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry.o ABSOLUTE
     ../clib/microlib/init/entry.s            0x00000000   Number         0  entry8a.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry8b.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry2.o ABSOLUTE
     ../clib/microlib/stubs.s                 0x00000000   Number         0  iusefp.o ABSOLUTE
     ../clib/microlib/stubs.s                 0x00000000   Number         0  useno.o ABSOLUTE
     ../fplib/microlib/fpadd.c                0x00000000   Number         0  fadd.o ABSOLUTE
@@ -741,8 +741,8 @@ Image Symbol Table
     .text                                    0x08000238   Section        0  fdiv.o(.text)
     .text                                    0x080002b4   Section        0  ffixui.o(.text)
     .text                                    0x080002dc   Section       20  cfrcmple.o(.text)
-    .text                                    0x080002f0   Section        0  fepilogue.o(.text)
     .text                                    0x080002f0   Section        0  iusefp.o(.text)
+    .text                                    0x080002f0   Section        0  fepilogue.o(.text)
     .text                                    0x08000360   Section       36  init.o(.text)
     i.BusFault_Handler                       0x08000384   Section        0  stm32f10x_it.o(i.BusFault_Handler)
     i.DebugMon_Handler                       0x08000388   Section        0  stm32f10x_it.o(i.DebugMon_Handler)
@@ -813,12 +813,13 @@ Image Symbol Table
     i.delay_init                             0x080013fc   Section        0  delay.o(i.delay_init)
     i.encoder_io_init                        0x08001440   Section        0  encoder.o(i.encoder_io_init)
     i.main                                   0x080014b0   Section        0  main.o(i.main)
-    i.motor_init                             0x08001504   Section        0  motor_operate.o(i.motor_init)
-    i.motor_io_init                          0x08001520   Section        0  motor_gpio.o(i.motor_io_init)
-    i.motor_run                              0x08001680   Section        0  motor_operate.o(i.motor_run)
-    i.set_dir                                0x08001794   Section        0  motor_operate.o(i.set_dir)
-    i.speed_inverse_solution                 0x08001848   Section        0  inverse_solution.o(i.speed_inverse_solution)
-    i.uart_init                              0x080018e0   Section        0  usart.o(i.uart_init)
+    i.motor_enable                           0x080014fc   Section        0  motor_operate.o(i.motor_enable)
+    i.motor_init                             0x08001518   Section        0  motor_operate.o(i.motor_init)
+    i.motor_io_init                          0x08001538   Section        0  motor_gpio.o(i.motor_io_init)
+    i.motor_run                              0x08001698   Section        0  motor_operate.o(i.motor_run)
+    i.set_dir                                0x080017ac   Section        0  motor_operate.o(i.set_dir)
+    i.speed_inverse_solution                 0x08001860   Section        0  inverse_solution.o(i.speed_inverse_solution)
+    i.uart_init                              0x080018f8   Section        0  usart.o(i.uart_init)
     .data                                    0x20000000   Section        4  delay.o(.data)
     fac_us                                   0x20000000   Data           1  delay.o(.data)
     fac_ms                                   0x20000002   Data           2  delay.o(.data)
@@ -979,15 +980,16 @@ Image Symbol Table
     __scatterload_zeroinit                   0x080013ef   Thumb Code    14  handlers.o(i.__scatterload_zeroinit)
     delay_init                               0x080013fd   Thumb Code    50  delay.o(i.delay_init)
     encoder_io_init                          0x08001441   Thumb Code    98  encoder.o(i.encoder_io_init)
-    main                                     0x080014b1   Thumb Code    66  main.o(i.main)
-    motor_init                               0x08001505   Thumb Code    28  motor_operate.o(i.motor_init)
-    motor_io_init                            0x08001521   Thumb Code   336  motor_gpio.o(i.motor_io_init)
-    motor_run                                0x08001681   Thumb Code   260  motor_operate.o(i.motor_run)
-    set_dir                                  0x08001795   Thumb Code   174  motor_operate.o(i.set_dir)
-    speed_inverse_solution                   0x08001849   Thumb Code   140  inverse_solution.o(i.speed_inverse_solution)
-    uart_init                                0x080018e1   Thumb Code   152  usart.o(i.uart_init)
-    Region$$Table$$Base                      0x08001980   Number         0  anon$$obj.o(Region$$Table)
-    Region$$Table$$Limit                     0x080019a0   Number         0  anon$$obj.o(Region$$Table)
+    main                                     0x080014b1   Thumb Code    64  main.o(i.main)
+    motor_enable                             0x080014fd   Thumb Code    22  motor_operate.o(i.motor_enable)
+    motor_init                               0x08001519   Thumb Code    32  motor_operate.o(i.motor_init)
+    motor_io_init                            0x08001539   Thumb Code   336  motor_gpio.o(i.motor_io_init)
+    motor_run                                0x08001699   Thumb Code   260  motor_operate.o(i.motor_run)
+    set_dir                                  0x080017ad   Thumb Code   174  motor_operate.o(i.set_dir)
+    speed_inverse_solution                   0x08001861   Thumb Code   140  inverse_solution.o(i.speed_inverse_solution)
+    uart_init                                0x080018f9   Thumb Code   152  usart.o(i.uart_init)
+    Region$$Table$$Base                      0x08001998   Number         0  anon$$obj.o(Region$$Table)
+    Region$$Table$$Limit                     0x080019b8   Number         0  anon$$obj.o(Region$$Table)
     __stdout                                 0x20000004   Data           4  usart.o(.data)
     USART_RX_STA                             0x20000008   Data           2  usart.o(.data)
     TIM3CH1_CAPTURE_STA                      0x2000000a   Data           1  timer.o(.data)
@@ -1010,9 +1012,9 @@ Memory Map of the image
 
   Image Entry point : 0x080000ed
 
-  Load Region LR_IROM1 (Base: 0x08000000, Size: 0x000019d8, Max: 0x00010000, ABSOLUTE)
+  Load Region LR_IROM1 (Base: 0x08000000, Size: 0x000019f0, Max: 0x00010000, ABSOLUTE)
 
-    Execution Region ER_IROM1 (Exec base: 0x08000000, Load base: 0x08000000, Size: 0x000019a0, Max: 0x00010000, ABSOLUTE)
+    Execution Region ER_IROM1 (Exec base: 0x08000000, Load base: 0x08000000, Size: 0x000019b8, Max: 0x00010000, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
@@ -1106,32 +1108,33 @@ Memory Map of the image
     0x080013ee   0x080013ee   0x0000000e   Code   RO         3649    i.__scatterload_zeroinit  mc_w.l(handlers.o)
     0x080013fc   0x080013fc   0x00000044   Code   RO          274    i.delay_init        delay.o
     0x08001440   0x08001440   0x00000070   Code   RO          580    i.encoder_io_init   encoder.o
-    0x080014b0   0x080014b0   0x00000054   Code   RO            1    i.main              main.o
-    0x08001504   0x08001504   0x0000001c   Code   RO          148    i.motor_init        motor_operate.o
-    0x08001520   0x08001520   0x00000160   Code   RO          561    i.motor_io_init     motor_gpio.o
-    0x08001680   0x08001680   0x00000114   Code   RO          149    i.motor_run         motor_operate.o
-    0x08001794   0x08001794   0x000000b4   Code   RO          150    i.set_dir           motor_operate.o
-    0x08001848   0x08001848   0x00000098   Code   RO          180    i.speed_inverse_solution  inverse_solution.o
-    0x080018e0   0x080018e0   0x000000a0   Code   RO          491    i.uart_init         usart.o
-    0x08001980   0x08001980   0x00000020   Data   RO         3645    Region$$Table       anon$$obj.o
+    0x080014b0   0x080014b0   0x0000004c   Code   RO            1    i.main              main.o
+    0x080014fc   0x080014fc   0x0000001c   Code   RO          147    i.motor_enable      motor_operate.o
+    0x08001518   0x08001518   0x00000020   Code   RO          148    i.motor_init        motor_operate.o
+    0x08001538   0x08001538   0x00000160   Code   RO          561    i.motor_io_init     motor_gpio.o
+    0x08001698   0x08001698   0x00000114   Code   RO          149    i.motor_run         motor_operate.o
+    0x080017ac   0x080017ac   0x000000b4   Code   RO          150    i.set_dir           motor_operate.o
+    0x08001860   0x08001860   0x00000098   Code   RO          180    i.speed_inverse_solution  inverse_solution.o
+    0x080018f8   0x080018f8   0x000000a0   Code   RO          491    i.uart_init         usart.o
+    0x08001998   0x08001998   0x00000020   Data   RO         3645    Region$$Table       anon$$obj.o
 
 
-    Execution Region RW_IRAM1 (Exec base: 0x20000000, Load base: 0x080019a0, Size: 0x000005b8, Max: 0x00005000, ABSOLUTE)
+    Execution Region RW_IRAM1 (Exec base: 0x20000000, Load base: 0x080019b8, Size: 0x000005b8, Max: 0x00005000, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
-    0x20000000   0x080019a0   0x00000004   Data   RW          277    .data               delay.o
-    0x20000004   0x080019a4   0x00000006   Data   RW          493    .data               usart.o
-    0x2000000a   0x080019aa   0x00000004   Data   RW          533    .data               timer.o
-    0x2000000e   0x080019ae   0x00000014   Data   RW         2192    .data               stm32f10x_rcc.o
-    0x20000022   0x080019c2   0x00000002   PAD
-    0x20000024   0x080019c4   0x00000014   Data   RW         3566    .data               system_stm32f10x.o
+    0x20000000   0x080019b8   0x00000004   Data   RW          277    .data               delay.o
+    0x20000004   0x080019bc   0x00000006   Data   RW          493    .data               usart.o
+    0x2000000a   0x080019c2   0x00000004   Data   RW          533    .data               timer.o
+    0x2000000e   0x080019c6   0x00000014   Data   RW         2192    .data               stm32f10x_rcc.o
+    0x20000022   0x080019da   0x00000002   PAD
+    0x20000024   0x080019dc   0x00000014   Data   RW         3566    .data               system_stm32f10x.o
     0x20000038        -       0x0000001c   Zero   RW          181    .bss                inverse_solution.o
     0x20000054        -       0x000000c8   Zero   RW          492    .bss                usart.o
     0x2000011c        -       0x00000028   Zero   RW          532    .bss                timer.o
     0x20000144        -       0x00000060   Zero   RW          562    .bss                motor_gpio.o
     0x200001a4        -       0x00000010   Zero   RW          581    .bss                encoder.o
-    0x200001b4   0x080019d8   0x00000004   PAD
+    0x200001b4   0x080019f0   0x00000004   PAD
     0x200001b8        -       0x00000400   Zero   RW         3606    STACK               startup_stm32f10x_md.o
 
 
@@ -1146,10 +1149,10 @@ Image component sizes
        112         14          0          0         16       1064   encoder.o
        152         12          0          0         28       1780   inverse_solution.o
         56          6          0          0          0     203943   led.o
-        84         18          0          0          0     252151   main.o
+        76         12          0          0          0     252147   main.o
        172         22          0          0          0       2209   misc.o
        352         16          0          0         96       2411   motor_gpio.o
-       484         22          0          0          0       1563   motor_operate.o
+       516         28          0          0          0       2026   motor_operate.o
         36          8        236          0       1024        804   startup_stm32f10x_md.o
        430          6          0          0          0       4050   stm32f10x_gpio.o
         18          0          0          0          0       2559   stm32f10x_it.o
@@ -1162,7 +1165,7 @@ Image component sizes
        296         22          0          6        200       3040   usart.o
 
     ----------------------------------------------------------------------
-      5634        456        268         56       1408     510059   Object Totals
+      5658        456        268         56       1408     510518   Object Totals
          0          0         32          0          0          0   (incl. Generated)
         16          0          0          2          4          0   (incl. Padding)
 
@@ -1209,15 +1212,15 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   
 
-      6292        472        268         56       1408     507403   Grand Totals
-      6292        472        268         56       1408     507403   ELF Image Totals
-      6292        472        268         56          0          0   ROM Totals
+      6316        472        268         56       1408     507810   Grand Totals
+      6316        472        268         56       1408     507810   ELF Image Totals
+      6316        472        268         56          0          0   ROM Totals
 
 ==============================================================================
 
-    Total RO  Size (Code + RO Data)                 6560 (   6.41kB)
+    Total RO  Size (Code + RO Data)                 6584 (   6.43kB)
     Total RW  Size (RW Data + ZI Data)              1464 (   1.43kB)
-    Total ROM Size (Code + RO Data + RW Data)       6616 (   6.46kB)
+    Total ROM Size (Code + RO Data + RW Data)       6640 (   6.48kB)
 
 ==============================================================================
 

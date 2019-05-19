@@ -20,6 +20,7 @@ void motor_init(void)
 {
 	TIM3_Init(TIM3_ARR,TIM3_PSC);	/* 初始化TIM3,提供给编码器使用 */
 	TIM4_PWM_Init(TIM4_ARR,TIM4_PSC);	/* 初始化TIM4,提供给电机驱动使用 */
+	motor_enable();
 }
 
 /**
