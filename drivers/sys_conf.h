@@ -30,6 +30,7 @@
 #include "encoder.h"
 #include "motor_operate.h"
 #include "inverse_solution.h"
+#include "pid.h"
 
 /**
  *@description define 
@@ -39,7 +40,7 @@
 #define b 200
 #define TIM3_ARR 10000
 #define TIM3_PSC 7199
-#define TIM4_ARR 1000
+#define TIM4_ARR 10000
 #define TIM4_PSC 7199
 #define MAX_RPM 70
 
@@ -59,18 +60,18 @@ extern u16 TIM3CH1_CAPTURE_VAL;
 
 typedef struct wheel_speed
 {
-	u8 Vw0;
-	u8 Vw1;
-	u8 Vw2;
-	u8 Vw3;
+	float Vw0;
+	float Vw1;
+	float Vw2;
+	float Vw3;
 }wheel_speed;
 extern wheel_speed W_S;
 
 typedef struct car_speed
 {
-	u8 Vx;
-	u8 Vy;
-	u8 W;
+	float Vx;
+	float Vy;
+	float W;
 }car_speed;
 extern car_speed C_S;
 

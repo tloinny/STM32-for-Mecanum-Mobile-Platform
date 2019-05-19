@@ -92,3 +92,9 @@ void set_dir(int m, char dir)
 		GPIO_ResetBits(Motors[m].motor_gpio_type[2],Motors[m].motor_gpio[2].GPIO_Pin);	/* N2 0*/			
 	}
 }
+
+void motor_enable(void)
+{
+	GPIO_SetBits(GPIOB,GPIO_Pin_5);
+	GPIO_SetBits(GPIOB,GPIO_Pin_13);
+}

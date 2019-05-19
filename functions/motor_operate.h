@@ -5,5 +5,6 @@
 void motor_init(void);
 void motor_run(void);
 void set_dir(int m, char dir);
+void motor_enable(void);
 
 #endif
