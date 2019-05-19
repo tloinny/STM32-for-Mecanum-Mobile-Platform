@@ -39,10 +39,11 @@ void motor_io_init(int pwm)
 			
 			for(int n=0;n<4;++n)
 			{
-				Motors[n].motor_gpio[1].GPIO_Mode = GPIO_Mode_AF_PP;
-				Motors[n].motor_gpio[1].GPIO_Speed = GPIO_Speed_50MHz;
+				Motors[n].motor_gpio[0].GPIO_Mode = GPIO_Mode_AF_PP;
+				Motors[n].motor_gpio[0].GPIO_Speed = GPIO_Speed_50MHz;
 				GPIO_Init(Motors[n].motor_gpio_type[0], &(Motors[n].motor_gpio[0]));
 			}
+			return;
 		}
 	
 	/* ÅäÖÃ·½Ïò½Å */
@@ -59,7 +60,7 @@ void motor_io_init(int pwm)
 	for(int i=0;i<4;++i)
 		for(int n=1;n<3;++n)
 		{
-			Motors[i].motor_gpio[n].GPIO_Mode = GPIO_Mode_AF_PP;
+			Motors[i].motor_gpio[n].GPIO_Mode = GPIO_Mode_Out_PP;
 			Motors[i].motor_gpio[n].GPIO_Speed = GPIO_Speed_50MHz;
 		}
 		
@@ -80,12 +81,12 @@ void motor_io_init(int pwm)
 			GPIO_Init(Motors[i].motor_gpio_type[n], &(Motors[i].motor_gpio[n]));
 	
 	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_5;
-	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP;
+	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
 	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
 	GPIO_Init(GPIOB, &GPIO_InitStructure);
 	
 	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_13;
-	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP;
+	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
 	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
 	GPIO_Init(GPIOB, &GPIO_InitStructure);
 }

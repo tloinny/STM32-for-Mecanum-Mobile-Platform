@@ -24,6 +24,6 @@ int main(void)
 	C_S.W = 0;
 		speed_inverse_solution();
 		motor_run();    
-	GPIO_SetBits(GPIOB,GPIO_Pin_3);
+	GPIO_SetBits(GPIOB,GPIO_Pin_5);
 }
 

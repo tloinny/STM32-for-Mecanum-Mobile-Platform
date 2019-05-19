@@ -115,7 +115,7 @@ void TIM4_PWM_Init(u16 arr,u16 psc)
 	TIM_OCInitTypeDef TIM_OCInitStructure;
 
 	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM4, ENABLE);
-	motor_io_init();	/* 初始化电机驱动引脚 */
+	motor_io_init(1);	/* 初始化电机驱动引脚 */
 
    /* 初始化TIM4 */
 	TIM_TimeBaseStructure.TIM_Period = arr;
