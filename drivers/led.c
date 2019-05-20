@@ -28,4 +28,3 @@ void LED_Init(void)
  GPIO_Init(GPIOB, &GPIO_InitStructure);
  GPIO_ResetBits(GPIOB,GPIO_Pin_10);
 }
- 

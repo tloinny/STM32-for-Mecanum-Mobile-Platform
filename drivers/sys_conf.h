@@ -36,11 +36,11 @@
  *@description define 
  *在这里配置用户代码中的define值
  */
-#define a 300
-#define b 200
-#define TIM3_ARR 10000
-#define TIM3_PSC 7199
-#define TIM4_ARR 10000
+#define a 0.0824
+#define b 0.0665
+#define TIM3_ARR 0XFFFF
+#define TIM3_PSC 71
+#define TIM4_ARR 1000
 #define TIM4_PSC 7199
 #define MAX_RPM 70
 

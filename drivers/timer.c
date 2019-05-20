@@ -15,6 +15,15 @@ TIM_ICInitTypeDef encoders_channel[4];
 u8  TIM3CH1_CAPTURE_STA=0;
 u16 TIM3CH1_CAPTURE_VAL;
  
+u8  TIM3CH2_CAPTURE_STA=0;
+u16 TIM3CH2_CAPTURE_VAL;
+
+u8  TIM3CH3_CAPTURE_STA=0;
+u16 TIM3CH3_CAPTURE_VAL;
+
+u8  TIM3CH4_CAPTURE_STA=0;
+u16 TIM3CH4_CAPTURE_VAL;
+
 /**
  *@function TIM3 初始化 
  *@param 
@@ -71,6 +80,7 @@ void TIM3_Init(u16 arr,u16 psc)
  */
 void TIM3_IRQHandler(void)
 {
+	/* CH1 */
 	if((TIM3CH1_CAPTURE_STA&0X80)==0)	/* 如果尚未完成一次全程捕捉 */
 	{      
 		if (TIM_GetITStatus(TIM3, TIM_IT_Update) != RESET)	/* 如果发生了更新中断 */
@@ -99,7 +109,101 @@ void TIM3_IRQHandler(void)
 			}            
 		}                                                
 	}
+	
+	/* CH2 */
+	if((TIM3CH2_CAPTURE_STA&0X80)==0)	/* 如果尚未完成一次全程捕捉 */
+	{      
+		if (TIM_GetITStatus(TIM3, TIM_IT_Update) != RESET)	/* 如果发生了更新中断 */
+		{        
+			if(TIM3CH2_CAPTURE_STA&0X40)	/* 如果只捕捉到了起点，尚未捕捉到终点 */
+				{
+					if((TIM3CH2_CAPTURE_STA&0X3F)==0X3F)	/* 如果超过了能记录的最大范围 */
+						{
+							TIM3CH2_CAPTURE_STA|=0X80;	/* 强行视为已完成捕获 */
+							TIM3CH2_CAPTURE_VAL=0XFFFF;	/* VAL设置为最大值 */
+						}else TIM3CH2_CAPTURE_STA++;	/* 如果还没达到最大值，则继续记录 */
+				}     
+		}
+    if (TIM_GetITStatus(TIM3, TIM_IT_CC2) != RESET)	/* 如果发生了捕捉中断 */
+		{    
+			if(TIM3CH2_CAPTURE_STA&0X40)	/* 如果已经捕捉过起点，则表示此次捕捉到了终点 */
+			{                  
+				TIM3CH2_CAPTURE_STA|=0X80;	/* 标志为完成一次全程捕捉 */
+				TIM3CH2_CAPTURE_VAL=TIM_GetCapture1(TIM3);	/* 获取当前CNT值 */
+			}else	/* 如果还没捕捉过起点，则表示此次捕捉到了起点 */
+			{
+				TIM3CH2_CAPTURE_STA=0;	/* 清零STA，准备新一轮的记录 */
+				TIM3CH2_CAPTURE_VAL=0;	/* 清零VAL */
+				TIM_SetCounter(TIM3,0);	/* 清零CNT */
+				TIM3CH2_CAPTURE_STA|=0X40;	/* 标志为已经捕捉过起点 */
+			}            
+		}                                                
+	}
+	
+		/* CH3 */
+	if((TIM3CH3_CAPTURE_STA&0X80)==0)	/* 如果尚未完成一次全程捕捉 */
+	{      
+		if (TIM_GetITStatus(TIM3, TIM_IT_Update) != RESET)	/* 如果发生了更新中断 */
+		{        
+			if(TIM3CH3_CAPTURE_STA&0X40)	/* 如果只捕捉到了起点，尚未捕捉到终点 */
+				{
+					if((TIM3CH3_CAPTURE_STA&0X3F)==0X3F)	/* 如果超过了能记录的最大范围 */
+						{
+							TIM3CH3_CAPTURE_STA|=0X80;	/* 强行视为已完成捕获 */
+							TIM3CH3_CAPTURE_VAL=0XFFFF;	/* VAL设置为最大值 */
+						}else TIM3CH3_CAPTURE_STA++;	/* 如果还没达到最大值，则继续记录 */
+				}     
+		}
+    if (TIM_GetITStatus(TIM3, TIM_IT_CC3) != RESET)	/* 如果发生了捕捉中断 */
+		{    
+			if(TIM3CH3_CAPTURE_STA&0X40)	/* 如果已经捕捉过起点，则表示此次捕捉到了终点 */
+			{                  
+				TIM3CH3_CAPTURE_STA|=0X80;	/* 标志为完成一次全程捕捉 */
+				TIM3CH3_CAPTURE_VAL=TIM_GetCapture1(TIM3);	/* 获取当前CNT值 */
+			}else	/* 如果还没捕捉过起点，则表示此次捕捉到了起点 */
+			{
+				TIM3CH3_CAPTURE_STA=0;	/* 清零STA，准备新一轮的记录 */
+				TIM3CH3_CAPTURE_VAL=0;	/* 清零VAL */
+				TIM_SetCounter(TIM3,0);	/* 清零CNT */
+				TIM3CH3_CAPTURE_STA|=0X40;	/* 标志为已经捕捉过起点 */
+			}            
+		}                                                
+	}
+	
+		/* CH4 */
+	if((TIM3CH4_CAPTURE_STA&0X80)==0)	/* 如果尚未完成一次全程捕捉 */
+	{      
+		if (TIM_GetITStatus(TIM3, TIM_IT_Update) != RESET)	/* 如果发生了更新中断 */
+		{        
+			if(TIM3CH4_CAPTURE_STA&0X40)	/* 如果只捕捉到了起点，尚未捕捉到终点 */
+				{
+					if((TIM3CH4_CAPTURE_STA&0X3F)==0X3F)	/* 如果超过了能记录的最大范围 */
+						{
+							TIM3CH4_CAPTURE_STA|=0X80;	/* 强行视为已完成捕获 */
+							TIM3CH4_CAPTURE_VAL=0XFFFF;	/* VAL设置为最大值 */
+						}else TIM3CH4_CAPTURE_STA++;	/* 如果还没达到最大值，则继续记录 */
+				}     
+		}
+    if (TIM_GetITStatus(TIM3, TIM_IT_CC4) != RESET)	/* 如果发生了捕捉中断 */
+		{    
+			if(TIM3CH4_CAPTURE_STA&0X40)	/* 如果已经捕捉过起点，则表示此次捕捉到了终点 */
+			{                  
+				TIM3CH4_CAPTURE_STA|=0X80;	/* 标志为完成一次全程捕捉 */
+				TIM3CH4_CAPTURE_VAL=TIM_GetCapture1(TIM3);	/* 获取当前CNT值 */
+			}else	/* 如果还没捕捉过起点，则表示此次捕捉到了起点 */
+			{
+				TIM3CH4_CAPTURE_STA=0;	/* 清零STA，准备新一轮的记录 */
+				TIM3CH4_CAPTURE_VAL=0;	/* 清零VAL */
+				TIM_SetCounter(TIM3,0);	/* 清零CNT */
+				TIM3CH4_CAPTURE_STA|=0X40;	/* 标志为已经捕捉过起点 */
+			}            
+		}                                                
+	}
+	
 	TIM_ClearITPendingBit(TIM3, TIM_IT_CC1|TIM_IT_Update);
+	TIM_ClearITPendingBit(TIM3, TIM_IT_CC2|TIM_IT_Update);
+	TIM_ClearITPendingBit(TIM3, TIM_IT_CC3|TIM_IT_Update);
+	TIM_ClearITPendingBit(TIM3, TIM_IT_CC4|TIM_IT_Update);
 }
 
 /**

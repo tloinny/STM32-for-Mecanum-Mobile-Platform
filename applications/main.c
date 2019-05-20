@@ -19,15 +19,15 @@ int main(void)
 	LED_Init();
 	uart_init(115200);
 	motor_init();
+	LED0 = 1;
 	
 	C_S.Vx = 0;
 	C_S.Vy = 0;
-	C_S.W = 5
-	
-	
-	;
+	C_S.W = 5;
 		speed_inverse_solution();
 		motor_run();    
-	GPIO_SetBits(GPIOB,GPIO_Pin_10);
+	while(1)
+	{
+	}
 }
 
