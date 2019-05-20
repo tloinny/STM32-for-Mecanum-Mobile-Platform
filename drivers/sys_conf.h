@@ -57,6 +57,12 @@ typedef struct motor
 extern motor Motors[];
 extern u8  TIM3CH1_CAPTURE_STA;
 extern u16 TIM3CH1_CAPTURE_VAL;
+extern u8  TIM3CH2_CAPTURE_STA;
+extern u16 TIM3CH2_CAPTURE_VAL;
+extern u8  TIM3CH3_CAPTURE_STA;
+extern u16 TIM3CH3_CAPTURE_VAL;
+extern u8  TIM3CH4_CAPTURE_STA;
+extern u16 TIM3CH4_CAPTURE_VAL;
 
 typedef struct wheel_speed
 {
