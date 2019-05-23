@@ -40,9 +40,11 @@
 #define b 0.0665
 #define TIM3_ARR 0XFFFF
 #define TIM3_PSC 71
-#define TIM4_ARR 1000
+#define TIM4_ARR 100
 #define TIM4_PSC 7199
 #define MAX_RPM 70
+#define waiting_forever 0
+#define error -1
 
 /**
  *@description extern 
@@ -54,6 +56,7 @@ typedef struct motor
 	GPIO_InitTypeDef motor_gpio[3];
 }motor;
  
+extern int scan;
 extern motor Motors[];
 extern u8  TIM3CH1_CAPTURE_STA;
 extern u16 TIM3CH1_CAPTURE_VAL;
@@ -63,6 +66,14 @@ extern u8  TIM3CH3_CAPTURE_STA;
 extern u16 TIM3CH3_CAPTURE_VAL;
 extern u8  TIM3CH4_CAPTURE_STA;
 extern u16 TIM3CH4_CAPTURE_VAL;
+extern u32 temp0;
+extern u32 temp1;
+extern u32 temp2;
+extern u32 temp3;
+extern u32 rpm0;
+extern u32 rpm1;
+extern u32 rpm2;
+extern u32 rpm3;
 
 typedef struct wheel_speed
 {

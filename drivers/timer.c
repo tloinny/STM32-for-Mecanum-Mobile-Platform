@@ -74,7 +74,8 @@ void TIM3_Init(u16 arr,u16 psc)
   NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;	/* 使能中断 */
   NVIC_Init(&NVIC_InitStructure);
 		
-	TIM_ITConfig(TIM3, TIM_IT_Update|TIM_IT_CC1, ENABLE);
+	//TIM_ITConfig(TIM3, TIM_IT_Update|TIM_IT_CC1|TIM_IT_CC2|TIM_IT_CC3|TIM_IT_CC4, ENABLE);
+	TIM_ITConfig(TIM3, TIM_IT_Update, ENABLE);
 	
 	TIM_Cmd(TIM3, ENABLE);  /* 使能TIM3 */
 }
@@ -105,8 +106,6 @@ void TIM3_IRQHandler(void)
 			{                  
 				TIM3CH1_CAPTURE_STA|=0X80;	/* 标志为完成一次全程捕捉 */
 				TIM3CH1_CAPTURE_VAL=TIM_GetCapture1(TIM3);	/* 获取当前CNT值 */
-				TIM_ITConfig(TIM3, TIM_IT_CC1|TIM_IT_CC3|TIM_IT_CC4, DISABLE);
-				TIM_ITConfig(TIM3, TIM_IT_CC2, ENABLE);
 			}else	/* 如果还没捕捉过起点，则表示此次捕捉到了起点 */
 			{
 				TIM3CH1_CAPTURE_STA=0;	/* 清零STA，准备新一轮的记录 */
@@ -136,9 +135,7 @@ void TIM3_IRQHandler(void)
 			if(TIM3CH2_CAPTURE_STA&0X40)	/* 如果已经捕捉过起点，则表示此次捕捉到了终点 */
 			{                  
 				TIM3CH2_CAPTURE_STA|=0X80;	/* 标志为完成一次全程捕捉 */
-				TIM3CH2_CAPTURE_VAL=TIM_GetCapture1(TIM3);	/* 获取当前CNT值 */
-				TIM_ITConfig(TIM3, TIM_IT_CC1|TIM_IT_CC2|TIM_IT_CC4, DISABLE);
-				TIM_ITConfig(TIM3, TIM_IT_CC3, ENABLE);
+				TIM3CH2_CAPTURE_VAL=TIM_GetCapture2(TIM3);	/* 获取当前CNT值 */
 			}else	/* 如果还没捕捉过起点，则表示此次捕捉到了起点 */
 			{
 				TIM3CH2_CAPTURE_STA=0;	/* 清零STA，准备新一轮的记录 */
@@ -168,9 +165,7 @@ void TIM3_IRQHandler(void)
 			if(TIM3CH3_CAPTURE_STA&0X40)	/* 如果已经捕捉过起点，则表示此次捕捉到了终点 */
 			{                  
 				TIM3CH3_CAPTURE_STA|=0X80;	/* 标志为完成一次全程捕捉 */
-				TIM3CH3_CAPTURE_VAL=TIM_GetCapture1(TIM3);	/* 获取当前CNT值 */
-				TIM_ITConfig(TIM3, TIM_IT_CC1|TIM_IT_CC2|TIM_IT_CC3, DISABLE);
-				TIM_ITConfig(TIM3, TIM_IT_CC4, ENABLE);
+				TIM3CH3_CAPTURE_VAL=TIM_GetCapture3(TIM3);	/* 获取当前CNT值 */
 			}else	/* 如果还没捕捉过起点，则表示此次捕捉到了起点 */
 			{
 				TIM3CH3_CAPTURE_STA=0;	/* 清零STA，准备新一轮的记录 */
@@ -200,9 +195,7 @@ void TIM3_IRQHandler(void)
 			if(TIM3CH4_CAPTURE_STA&0X40)	/* 如果已经捕捉过起点，则表示此次捕捉到了终点 */
 			{                  
 				TIM3CH4_CAPTURE_STA|=0X80;	/* 标志为完成一次全程捕捉 */
-				TIM3CH4_CAPTURE_VAL=TIM_GetCapture1(TIM3);	/* 获取当前CNT值 */
-				TIM_ITConfig(TIM3, TIM_IT_CC2|TIM_IT_CC3|TIM_IT_CC4, DISABLE);
-				TIM_ITConfig(TIM3, TIM_IT_CC1, ENABLE);
+				TIM3CH4_CAPTURE_VAL=TIM_GetCapture4(TIM3);	/* 获取当前CNT值 */
 			}else	/* 如果还没捕捉过起点，则表示此次捕捉到了起点 */
 			{
 				TIM3CH4_CAPTURE_STA=0;	/* 清零STA，准备新一轮的记录 */
@@ -212,11 +205,11 @@ void TIM3_IRQHandler(void)
 			}            
 		}                                                
 	}
-	
-	TIM_ClearITPendingBit(TIM3, TIM_IT_CC1|TIM_IT_Update);
-	TIM_ClearITPendingBit(TIM3, TIM_IT_CC2|TIM_IT_Update);
-	TIM_ClearITPendingBit(TIM3, TIM_IT_CC3|TIM_IT_Update);
-	TIM_ClearITPendingBit(TIM3, TIM_IT_CC4|TIM_IT_Update);
+	if(scan == 0) TIM_ClearITPendingBit(TIM3, TIM_IT_Update);
+	if(scan == 1) TIM_ClearITPendingBit(TIM3, TIM_IT_CC1|TIM_IT_Update);
+	if(scan == 2) TIM_ClearITPendingBit(TIM3, TIM_IT_CC2|TIM_IT_Update);
+	if(scan == 3) TIM_ClearITPendingBit(TIM3, TIM_IT_CC3|TIM_IT_Update);
+	if(scan == 4) TIM_ClearITPendingBit(TIM3, TIM_IT_CC4|TIM_IT_Update);
 }
 
 /**
